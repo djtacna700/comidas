@@ -3,236 +3,436 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Aprendiendo sobre Pachamanca y Quinua! 🎨🍲</title>
+    <title>Prueba: Pachamanca y Sopa de Quinua</title>
     <style>
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #FFF5E6;
-            color: #5C3A21;
         }
         h1 {
+            color: #2c3e50;
             text-align: center;
-            color: #E74C3C;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-            font-size: 2.5em;
-        }
-        h2 {
-            color: #27AE60;
-            background-color: #D5F5E3;
-            padding: 10px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .quiz-section {
-            background-color: #FFFFFF;
-            padding: 20px;
             margin-bottom: 30px;
-            border-radius: 20px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            border: 3px dashed #F39C12;
+            border-bottom: 3px solid #e74c3c;
+            padding-bottom: 10px;
+        }
+        .quiz-container {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
         }
         .question {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             padding: 15px;
-            background-color: #FEF9E7;
-            border-radius: 15px;
-            border-left: 5px solid #3498DB;
+            background-color: #f9f9f9;
+            border-left: 4px solid #3498db;
+            border-radius: 5px;
         }
-        .question p {
+        .question-text {
             font-weight: bold;
-            font-size: 1.1em;
-            color: #8E44AD;
+            margin-bottom: 15px;
+            color: #2c3e50;
         }
         .options {
-            margin-top: 10px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
         }
         .option {
-            margin: 8px 0;
-            padding: 10px;
+            padding: 10px 15px;
+            background-color: #ecf0f1;
+            border: 2px solid #bdc3c7;
+            border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s;
-            border-radius: 10px;
-            background-color: #EAEDED;
-            border: 2px solid #BDC3C7;
         }
         .option:hover {
-            background-color: #D6EAF8;
-            transform: scale(1.02);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #d6eaf8;
+            border-color: #3498db;
         }
-        .correct-option {
-            background-color: #ABEBC6 !important;
-            border: 2px solid #27AE60 !important;
+        .option.selected {
+            background-color: #3498db;
+            color: white;
+            border-color: #2980b9;
         }
-        .incorrect {
-            background-color: #FADBD8 !important;
-            border: 2px solid #E74C3C !important;
+        .option.correct {
+            background-color: #2ecc71;
+            color: white;
+            border-color: #27ae60;
         }
-        .result {
-            margin-top: 15px;
-            padding: 10px;
-            text-align: center;
-            font-weight: bold;
-            border-radius: 10px;
-            display: none;
-            animation: bounce 0.5s;
+        .option.incorrect {
+            background-color: #e74c3c;
+            color: white;
+            border-color: #c0392b;
         }
-        @keyframes bounce {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
         }
         button {
-            display: block;
-            margin: 25px auto;
-            padding: 12px 25px;
-            background-color: #E74C3C;
+            padding: 10px 20px;
+            background-color: #3498db;
             color: white;
             border: none;
-            border-radius: 50px;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 18px;
-            font-weight: bold;
-            transition: all 0.3s;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-size: 16px;
+            transition: background-color 0.3s;
         }
         button:hover {
-            background-color: #C0392B;
-            transform: scale(1.05);
+            background-color: #2980b9;
         }
-        .author {
+        button:disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+        }
+        .results {
             text-align: center;
-            font-style: italic;
             margin-top: 30px;
-            color: #7F8C8D;
-            background-color: #FDEBD0;
-            padding: 10px;
-            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            display: none;
         }
-        .emoji {
-            font-size: 1.2em;
+        .progress {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #7f8c8d;
         }
     </style>
 </head>
 <body>
-    <h1>🌿🍖 ¡Pachamanca y Sopa de Quinua! 🍲🌽</h1>
-    <h2>¿Cuánto sabes de estas comidas deliciosas?</h2>
+    <h1>Prueba sobre Pachamanca y Sopa de Quinua</h1>
     
-    <div class="quiz-section">
-        <h2>🍖 PACHAMANCA 🏔️</h2>
+    <div class="quiz-container">
+        <div class="progress">Pregunta 1 de 20</div>
         
-        <div class="question" id="q1">
-            <p>1. ¿Qué significa la palabra <strong>"Pachamanca"</strong>?</p>
+        <div class="question">
+            <div class="question-text">1. ¿Qué significa la palabra "Pachamanca"?</div>
             <div class="options">
-                <div class="option" onclick="checkAnswer(this, 'q1', 'A')">A) Comida caliente 🔥</div>
-                <div class="option" onclick="checkAnswer(this, 'q1', 'B')">B) Olla mágica ✨</div>
-                <div class="option correct-option" onclick="checkAnswer(this, 'q1', 'C')">C) Olla de tierra 🌍</div>
-                <div class="option" onclick="checkAnswer(this, 'q1', 'D')">D) Fuego sagrado 🕯️</div>
+                <div class="option" data-correct="false">A) Comida caliente</div>
+                <div class="option" data-correct="false">B) Olla mágica</div>
+                <div class="option" data-correct="true">C) Olla de tierra</div>
+                <div class="option" data-correct="false">D) Fuego sagrado</div>
             </div>
-            <div class="result" id="result-q1"></div>
         </div>
         
-        <!-- Más preguntas de Pachamanca aquí -->
-        
-    </div>
-    
-    <div class="quiz-section">
-        <h2>🍲 SOPA DE QUINUA 🌟</h2>
-        
-        <div class="question" id="q8">
-            <p>8. ¿Qué se elimina al lavar la quinua?</p>
-            <div class="options">
-                <div class="option" onclick="checkAnswer(this, 'q8', 'A')">A) Fibra 🧶</div>
-                <div class="option" onclick="checkAnswer(this, 'q8', 'B')">B) Grasa 🧈</div>
-                <div class="option correct-option" onclick="checkAnswer(this, 'q8', 'C')">C) Saponina � (¡Es amarga!)</div>
-                <div class="option" onclick="checkAnswer(this, 'q8', 'D')">D) Color 🎨</div>
-            </div>
-            <div class="result" id="result-q8"></div>
+        <div class="controls">
+            <button id="prev-btn" disabled>Anterior</button>
+            <button id="next-btn">Siguiente</button>
         </div>
-        
-        <!-- Más preguntas de Sopa de Quinua aquí -->
-        
     </div>
     
-    <button onclick="showResults()">🔍 Ver mi puntaje</button>
-    
-    <div class="author">
-        <p>✏️ Creado por: <strong>Prof. David Joel Acero</strong> - AIP IE Bélgica 🏫</p>
+    <div class="results">
+        <h2>Resultados</h2>
+        <p>Tu puntuación: <span id="score">0</span>/20</p>
+        <p id="result-message"></p>
+        <button id="restart-btn">Volver a intentar</button>
     </div>
 
     <script>
-        const correctAnswers = {
-            'q1': 'C', 'q2': 'B', 'q3': 'B', 'q4': 'B', 'q5': 'B',
-            'q6': 'B', 'q7': 'C', 'q8': 'C', 'q9': 'A', 'q10': 'A',
-            'q11': 'A', 'q12': 'C', 'q13': 'C', 'q14': 'C', 'q15': 'B',
-            'q16': 'B', 'q17': 'C', 'q18': 'C', 'q19': 'B', 'q20': 'C'
-        };
-        
-        const userAnswers = {};
+        const questions = [
+            {
+                question: "1. ¿Qué significa la palabra 'Pachamanca'?",
+                options: [
+                    { text: "A) Comida caliente", correct: false },
+                    { text: "B) Olla mágica", correct: false },
+                    { text: "C) Olla de tierra", correct: true },
+                    { text: "D) Fuego sagrado", correct: false }
+                ]
+            },
+            {
+                question: "2. ¿Qué hierbas aromáticas se usan en el aderezo?",
+                options: [
+                    { text: "A) Orégano y perejil", correct: false },
+                    { text: "B) Culantro, chincho, huacatay, hierbabuena", correct: true },
+                    { text: "C) Menta y albahaca", correct: false },
+                    { text: "D) Laurel y cilantro", correct: false }
+                ]
+            },
+            {
+                question: "3. ¿Qué bebidas se usan en el macerado?",
+                options: [
+                    { text: "A) Agua y jugo", correct: false },
+                    { text: "B) Chicha de jora", correct: true },
+                    { text: "C) Vinagre y vino", correct: false },
+                    { text: "D) Agua con limón", correct: false }
+                ]
+            },
+            {
+                question: "4. ¿Cuáles son las carnes principales?",
+                options: [
+                    { text: "A) Res, pollo y pato", correct: false },
+                    { text: "B) Res, pollo y cerdo", correct: true },
+                    { text: "C) Pescado, pollo y cuy", correct: false },
+                    { text: "D) Res, chancho y cordero", correct: false }
+                ]
+            },
+            {
+                question: "5. ¿Por qué se hacen cortes en la carne?",
+                options: [
+                    { text: "A) Para decorar", correct: false },
+                    { text: "B) Para que el sabor penetre", correct: true },
+                    { text: "C) Para pesarla", correct: false },
+                    { text: "D) Para sacarle la grasa", correct: false }
+                ]
+            },
+            {
+                question: "6. ¿Qué se usa para cubrir los ingredientes en la olla?",
+                options: [
+                    { text: "A) Papel aluminio", correct: false },
+                    { text: "B) Hojas de maíz (panca)", correct: true },
+                    { text: "C) Trapo", correct: false },
+                    { text: "D) Bolsas de plástico", correct: false }
+                ]
+            },
+            {
+                question: "7. ¿Cuál es el origen de este plato Pachamanca?",
+                options: [
+                    { text: "A) Época colonial", correct: false },
+                    { text: "B) Época republicana", correct: false },
+                    { text: "C) Época inca", correct: true },
+                    { text: "D) Actualidad", correct: false }
+                ]
+            },
+            {
+                question: "8. ¿Qué se elimina al lavar la quinua?",
+                options: [
+                    { text: "A) Fibra", correct: false },
+                    { text: "B) Grasa", correct: false },
+                    { text: "C) Saponina", correct: true },
+                    { text: "D) Color", correct: false }
+                ]
+            },
+            {
+                question: "9. ¿Qué verdura se pica junto a la cebolla?",
+                options: [
+                    { text: "A) Ajo", correct: true },
+                    { text: "B) Perejil", correct: false },
+                    { text: "C) Papas", correct: false },
+                    { text: "D) Zanahoria", correct: false }
+                ]
+            },
+            {
+                question: "10. ¿Cuándo se agrega la zanahoria?",
+                options: [
+                    { text: "A) Después de la quinua", correct: true },
+                    { text: "B) Antes del aderezo", correct: false },
+                    { text: "C) Junto con el palillo", correct: false },
+                    { text: "D) Después de las papas", correct: false }
+                ]
+            },
+            {
+                question: "11. ¿Qué se agrega para dar color?",
+                options: [
+                    { text: "A) Palillo", correct: true },
+                    { text: "B) Azafrán", correct: false },
+                    { text: "C) Ají", correct: false },
+                    { text: "D) Mantequilla", correct: false }
+                ]
+            },
+            {
+                question: "12. ¿Con qué se muele el palillo?",
+                options: [
+                    { text: "A) Piedra", correct: false },
+                    { text: "B) Licuadora", correct: false },
+                    { text: "C) Mortero", correct: true },
+                    { text: "D) Cuchara", correct: false }
+                ]
+            },
+            {
+                question: "13. ¿Cuál es la textura final de la sopa?",
+                options: [
+                    { text: "A) Clara", correct: false },
+                    { text: "B) Aguada", correct: false },
+                    { text: "C) Espesa", correct: true },
+                    { text: "D) Seca", correct: false }
+                ]
+            },
+            {
+                question: "14. ¿Para qué sirve la quinua en la sopa?",
+                options: [
+                    { text: "A) Aromatizar", correct: false },
+                    { text: "B) Decorar", correct: false },
+                    { text: "C) Aportar nutrientes", correct: true },
+                    { text: "D) Endulzar", correct: false }
+                ]
+            },
+            {
+                question: "15. ¿Qué color tiene la sopa al final?",
+                options: [
+                    { text: "A) Rojo", correct: false },
+                    { text: "B) Amarillo", correct: true },
+                    { text: "C) Verde", correct: false },
+                    { text: "D) Blanco", correct: false }
+                ]
+            },
+            {
+                question: "16. ¿Qué otro nombre recibe el palillo?",
+                options: [
+                    { text: "A) Ají", correct: false },
+                    { text: "B) Cúrcuma", correct: true },
+                    { text: "C) Pimienta", correct: false },
+                    { text: "D) Salsa", correct: false }
+                ]
+            },
+            {
+                question: "17. ¿Cómo sabemos que la quinua está cocida?",
+                options: [
+                    { text: "A) Se hunde", correct: false },
+                    { text: "B) Cambia de color", correct: false },
+                    { text: "C) Revienta", correct: true },
+                    { text: "D) Se hace dura", correct: false }
+                ]
+            },
+            {
+                question: "18. ¿En qué momento se añade la sal?",
+                options: [
+                    { text: "A) Al comienzo", correct: false },
+                    { text: "B) En el aderezo", correct: false },
+                    { text: "C) Al final", correct: true },
+                    { text: "D) Con el zucchini", correct: false }
+                ]
+            },
+            {
+                question: "19. ¿Qué propiedades tiene la cúrcuma?",
+                options: [
+                    { text: "A) Endulzante", correct: false },
+                    { text: "B) Antiinflamatoria y antioxidante", correct: true },
+                    { text: "C) Ninguna", correct: false },
+                    { text: "D) Grasosa", correct: false }
+                ]
+            },
+            {
+                question: "20. ¿Cuál es el valor principal de esta sopa?",
+                options: [
+                    { text: "A) Rápida", correct: false },
+                    { text: "B) Colorida", correct: false },
+                    { text: "C) Saludable", correct: true },
+                    { text: "D) Fácil", correct: false }
+                ]
+            }
+        ];
+
+        // Variables de estado
+        let currentQuestion = 0;
         let score = 0;
-        
-        function checkAnswer(element, questionId, selectedOption) {
-            // Reset all options in this question
-            const options = element.parentElement.children;
-            for (let option of options) {
-                option.classList.remove('correct-option', 'incorrect');
-            }
+        let userAnswers = new Array(questions.length).fill(null);
+
+        // Elementos del DOM
+        const quizContainer = document.querySelector('.quiz-container');
+        const resultsContainer = document.querySelector('.results');
+        const questionText = document.querySelector('.question-text');
+        const optionsContainer = document.querySelector('.options');
+        const progressText = document.querySelector('.progress');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const scoreElement = document.getElementById('score');
+        const resultMessage = document.getElementById('result-message');
+        const restartBtn = document.getElementById('restart-btn');
+
+        // Mostrar pregunta actual
+        function showQuestion(index) {
+            const question = questions[index];
+            questionText.textContent = question.question;
             
-            // Check if answer is correct
-            if (selectedOption === correctAnswers[questionId]) {
-                element.classList.add('correct-option');
-                userAnswers[questionId] = true;
-            } else {
-                element.classList.add('incorrect');
-                userAnswers[questionId] = false;
-                
-                // Show the correct answer
-                for (let option of options) {
-                    if (option.textContent.includes(correctAnswers[questionId])) {
-                        option.classList.add('correct-option');
-                    }
+            optionsContainer.innerHTML = '';
+            question.options.forEach((option, i) => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add('option');
+                if (userAnswers[index] === i) {
+                    optionElement.classList.add('selected');
                 }
-            }
+                optionElement.textContent = option.text;
+                optionElement.dataset.correct = option.correct;
+                optionElement.addEventListener('click', () => selectOption(i));
+                optionsContainer.appendChild(optionElement);
+            });
             
-            // Show result message
-            const resultElement = document.getElementById(`result-${questionId}`);
-            resultElement.style.display = 'block';
+            progressText.textContent = `Pregunta ${index + 1} de ${questions.length}`;
+            prevBtn.disabled = index === 0;
+            nextBtn.textContent = index === questions.length - 1 ? 'Finalizar' : 'Siguiente';
+        }
+
+        // Seleccionar opción
+        function selectOption(optionIndex) {
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected', 'correct', 'incorrect'));
             
-            if (selectedOption === correctAnswers[questionId]) {
-                resultElement.textContent = '¡Correcto! 🎉';
-                resultElement.style.backgroundColor = '#D5F5E3';
-                resultElement.style.color = '#145A32';
+            options[optionIndex].classList.add('selected');
+            userAnswers[currentQuestion] = optionIndex;
+            
+            // Mostrar retroalimentación inmediata
+            const isCorrect = questions[currentQuestion].options[optionIndex].correct;
+            if (isCorrect) {
+                options[optionIndex].classList.add('correct');
             } else {
-                resultElement.textContent = '¡Ups! Intenta de nuevo. 💡';
-                resultElement.style.backgroundColor = '#FADBD8';
-                resultElement.style.color = '#922B21';
+                options[optionIndex].classList.add('incorrect');
+                // Mostrar la respuesta correcta
+                questions[currentQuestion].options.forEach((opt, i) => {
+                    if (opt.correct) {
+                        options[i].classList.add('correct');
+                    }
+                });
             }
         }
-        
+
+        // Mostrar resultados
         function showResults() {
             score = 0;
-            for (let question in userAnswers) {
-                if (userAnswers[question]) {
+            questions.forEach((question, i) => {
+                if (userAnswers[i] !== null && question.options[userAnswers[i]].correct) {
                     score++;
                 }
-            }
+            });
             
-            let message = "";
-            let emoji = "";
+            quizContainer.style.display = 'none';
+            resultsContainer.style.display = 'block';
+            scoreElement.textContent = score;
             
             if (score >= 18) {
-                message = "¡Eres un experto! 🏆";
+                resultMessage.textContent = "¡Excelente! Eres un experto en comida peruana.";
             } else if (score >= 12) {
-                message = "¡Buen trabajo! 😊";
+                resultMessage.textContent = "¡Buen trabajo! Sabes bastante sobre estos platos.";
             } else {
-                message = "¡Sigue practicando! 💪";
+                resultMessage.textContent = "¡Sigue aprendiendo! La práctica hace al maestro.";
             }
-            
-            alert(`🎯 Tu puntuación: ${score}/20\n${message}`);
         }
+
+        // Event listeners
+        nextBtn.addEventListener('click', () => {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion(currentQuestion);
+            } else {
+                showResults();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion(currentQuestion);
+            }
+        });
+
+        restartBtn.addEventListener('click', () => {
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            quizContainer.style.display = 'block';
+            resultsContainer.style.display = 'none';
+            showQuestion(currentQuestion);
+        });
+
+        // Iniciar prueba
+        showQuestion(currentQuestion);
     </script>
 </body>
 </html>
