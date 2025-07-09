@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Aprendiendo sobre Pachamanca y Quinua! 🎨🍲</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #FFF5E6;
+            color: #5C3A21;
+        }
+        h1 {
+            text-align: center;
+            color: #E74C3C;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-size: 2.5em;
+        }
+        h2 {
+            color: #27AE60;
+            background-color: #D5F5E3;
+            padding: 10px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .quiz-section {
+            background-color: #FFFFFF;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            border: 3px dashed #F39C12;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #FEF9E7;
+            border-radius: 15px;
+            border-left: 5px solid #3498DB;
+        }
+        .question p {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #8E44AD;
+        }
+        .options {
+            margin-top: 10px;
+        }
+        .option {
+            margin: 8px 0;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 10px;
+            background-color: #EAEDED;
+            border: 2px solid #BDC3C7;
+        }
+        .option:hover {
+            background-color: #D6EAF8;
+            transform: scale(1.02);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .correct-option {
+            background-color: #ABEBC6 !important;
+            border: 2px solid #27AE60 !important;
+        }
+        .incorrect {
+            background-color: #FADBD8 !important;
+            border: 2px solid #E74C3C !important;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 10px;
+            display: none;
+            animation: bounce 0.5s;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        button {
+            display: block;
+            margin: 25px auto;
+            padding: 12px 25px;
+            background-color: #E74C3C;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        button:hover {
+            background-color: #C0392B;
+            transform: scale(1.05);
+        }
+        .author {
+            text-align: center;
+            font-style: italic;
+            margin-top: 30px;
+            color: #7F8C8D;
+            background-color: #FDEBD0;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .emoji {
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌿🍖 ¡Pachamanca y Sopa de Quinua! 🍲🌽</h1>
+    <h2>¿Cuánto sabes de estas comidas deliciosas?</h2>
+    
+    <div class="quiz-section">
+        <h2>🍖 PACHAMANCA 🏔️</h2>
+        
+        <div class="question" id="q1">
+            <p>1. ¿Qué significa la palabra <strong>"Pachamanca"</strong>?</p>
+            <div class="options">
+                <div class="option" onclick="checkAnswer(this, 'q1', 'A')">A) Comida caliente 🔥</div>
+                <div class="option" onclick="checkAnswer(this, 'q1', 'B')">B) Olla mágica ✨</div>
+                <div class="option correct-option" onclick="checkAnswer(this, 'q1', 'C')">C) Olla de tierra 🌍</div>
+                <div class="option" onclick="checkAnswer(this, 'q1', 'D')">D) Fuego sagrado 🕯️</div>
+            </div>
+            <div class="result" id="result-q1"></div>
+        </div>
+        
+        <!-- Más preguntas de Pachamanca aquí -->
+        
+    </div>
+    
+    <div class="quiz-section">
+        <h2>🍲 SOPA DE QUINUA 🌟</h2>
+        
+        <div class="question" id="q8">
+            <p>8. ¿Qué se elimina al lavar la quinua?</p>
+            <div class="options">
+                <div class="option" onclick="checkAnswer(this, 'q8', 'A')">A) Fibra 🧶</div>
+                <div class="option" onclick="checkAnswer(this, 'q8', 'B')">B) Grasa 🧈</div>
+                <div class="option correct-option" onclick="checkAnswer(this, 'q8', 'C')">C) Saponina � (¡Es amarga!)</div>
+                <div class="option" onclick="checkAnswer(this, 'q8', 'D')">D) Color 🎨</div>
+            </div>
+            <div class="result" id="result-q8"></div>
+        </div>
+        
+        <!-- Más preguntas de Sopa de Quinua aquí -->
+        
+    </div>
+    
+    <button onclick="showResults()">🔍 Ver mi puntaje</button>
+    
+    <div class="author">
+        <p>✏️ Creado por: <strong>Prof. David Joel Acero</strong> - AIP IE Bélgica 🏫</p>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            'q1': 'C', 'q2': 'B', 'q3': 'B', 'q4': 'B', 'q5': 'B',
+            'q6': 'B', 'q7': 'C', 'q8': 'C', 'q9': 'A', 'q10': 'A',
+            'q11': 'A', 'q12': 'C', 'q13': 'C', 'q14': 'C', 'q15': 'B',
+            'q16': 'B', 'q17': 'C', 'q18': 'C', 'q19': 'B', 'q20': 'C'
+        };
+        
+        const userAnswers = {};
+        let score = 0;
+        
+        function checkAnswer(element, questionId, selectedOption) {
+            // Reset all options in this question
+            const options = element.parentElement.children;
+            for (let option of options) {
+                option.classList.remove('correct-option', 'incorrect');
+            }
+            
+            // Check if answer is correct
+            if (selectedOption === correctAnswers[questionId]) {
+                element.classList.add('correct-option');
+                userAnswers[questionId] = true;
+            } else {
+                element.classList.add('incorrect');
+                userAnswers[questionId] = false;
+                
+                // Show the correct answer
+                for (let option of options) {
+                    if (option.textContent.includes(correctAnswers[questionId])) {
+                        option.classList.add('correct-option');
+                    }
+                }
+            }
+            
+            // Show result message
+            const resultElement = document.getElementById(`result-${questionId}`);
+            resultElement.style.display = 'block';
+            
+            if (selectedOption === correctAnswers[questionId]) {
+                resultElement.textContent = '¡Correcto! 🎉';
+                resultElement.style.backgroundColor = '#D5F5E3';
+                resultElement.style.color = '#145A32';
+            } else {
+                resultElement.textContent = '¡Ups! Intenta de nuevo. 💡';
+                resultElement.style.backgroundColor = '#FADBD8';
+                resultElement.style.color = '#922B21';
+            }
+        }
+        
+        function showResults() {
+            score = 0;
+            for (let question in userAnswers) {
+                if (userAnswers[question]) {
+                    score++;
+                }
+            }
+            
+            let message = "";
+            let emoji = "";
+            
+            if (score >= 18) {
+                message = "¡Eres un experto! 🏆";
+            } else if (score >= 12) {
+                message = "¡Buen trabajo! 😊";
+            } else {
+                message = "¡Sigue practicando! 💪";
+            }
+            
+            alert(`🎯 Tu puntuación: ${score}/20\n${message}`);
+        }
+    </script>
+</body>
+</html>
